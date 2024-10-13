@@ -22,6 +22,9 @@ class BST:
         else:
             raise ValueError("Not a valid operation code")
     
+    def root(self):
+        return self.root
+    
     def insert(self,str):
         # takes in string from file and inserts into tree
         # example input string: "I8599999Zot                      0451WET 1"
@@ -44,15 +47,51 @@ class BST:
                 else:
                     currNode = currNode.right
     
-    def remove(self,str):
+    def delete(self,str):
         exit
-                
+
+    def inOrder(self,node):
+        if node:
+            self.inOrder(node.left)
+            print(node.lastName)
+            self.inOrder(node.right)
+
+    def preOrder(self,node):
+        if not node:
+            return 
+        print(node.lastName)
+        if node.left:
+            self.preOrder(node.left)
+        if node.right:
+            self.preOrder(node.right)
+
+    def postOrder(self,node):
+        if not node:
+            return 
+        if node.left:
+            self.postOrder(node.left)
+        if node.right:
+            self.postOrder(node.right)
+        print(node.lastName)
+    
+    def BFS(self,root):
+        queue = [root]
+        while queue:
+            currNode = queue.pop(0)
+            print(currNode.lastName)
+            if currNode.left:
+                queue.append(currNode.left)
+            if currNode.right:
+                queue.append(currNode.right)
+            
+    
 newBST = BST()
-f = open("tree-input.txt","r")
+f = open("fifteen.txt","r")
 for line in f:
     newBST.insert(line)
 f.close()
 
-print(newBST.root.lastName)
-print(newBST.root.left.lastName)
-print(newBST.root.left.left.lastName)
+# print(newBST.root.lastName)
+# print(newBST.root.left.lastName)
+# print(newBST.root.left.left.lastName)
+newBST.inOrder(newBST.root)
