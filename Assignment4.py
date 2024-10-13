@@ -37,13 +37,13 @@ class BST:
             if currNode.lastName > str[slice(8, 33)]:
                 if not currNode.left:
                     currNode.left = Node(str)
-                    break
+                    return
                 else:
                     currNode = currNode.left
             else:
                 if not currNode.right:
                     currNode.right = Node(str)
-                    break
+                    return
                 else:
                     currNode = currNode.right
     
