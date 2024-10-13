@@ -33,6 +33,7 @@ class BST:
             self.root = Node(str)
             return
         currNode = self.root
+        # COMPARATOR IS THE THING THATS MESSED UP
         while currNode:
             if currNode.lastName > str[slice(8, 33)]:
                 if not currNode.left:
