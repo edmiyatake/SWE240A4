@@ -35,12 +35,14 @@ class BST:
         currNode = self.root
         # COMPARATOR IS THE THING THATS MESSED UP
         while currNode:
+            # if nextNode.str is less than parentNode.str => place in left
             if currNode.lastName > str[slice(8, 33)]:
                 if not currNode.left:
                     currNode.left = Node(str)
                     return
                 else:
                     currNode = currNode.left
+            # if nextNode is greater than the parentNode => insert into the right
             else:
                 if not currNode.right:
                     currNode.right = Node(str)
@@ -52,6 +54,8 @@ class BST:
         exit
 
     def inOrder(self,node):
+        if not node:
+            return 
         if node:
             self.inOrder(node.left)
             print(node.lastName)
@@ -84,6 +88,13 @@ class BST:
                 queue.append(currNode.left)
             if currNode.right:
                 queue.append(currNode.right)
+    
+    def printTree(self,node, level=0):
+        if node != None:
+            self.printTree(node.left, level + 1)
+            print(' ' * 4 * level + '-> ' + str(node.lastName))
+            self.printTree(node.right, level + 1)
+
             
     
 newBST = BST()
@@ -92,7 +103,5 @@ for line in f:
     newBST.insert(line)
 f.close()
 
-# print(newBST.root.lastName)
-# print(newBST.root.left.lastName)
-# print(newBST.root.left.left.lastName)
-newBST.inOrder(newBST.root)
+# newBST.inOrder(newBST.root)
+newBST.printTree(newBST.root)
