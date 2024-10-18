@@ -1,13 +1,15 @@
 # SET AVL IMPLEMENTATION FROM MIT WEBSITE
 def strToASCII(str):
     sum = 0
-    for char in str:
-        sum += ord(char)
+    # problem was that the first char was not taking precedence
+    # as i increases terms in sum should get smaller if divided by i
+    for i in range(0,len(str) - 2):
+        sum += ord(str[i]) + (ord(str[i+1]) * 0.1) + (ord(str[i+2]) * 0.01)
     return sum
 
 def strToVal(str): 
     string1 = str[slice(8,33)]
-    num = int(strToASCII(string1))
+    num = int(strToASCII(string1)) 
     return num
 
 class Node:
@@ -140,8 +142,6 @@ def inOrder(node):
             inOrder(node.left)
             print(node.lastName)
             inOrder(node.right)
-    
-PROBLEM IS THE COMPARATOR USING ORD INSTEAD OF INDEX BASED SORTING FUCKKKKKKKKKKKKKKKKKKKKKK
 
 def printTree(node, level=0):
         if node != None:
@@ -170,5 +170,5 @@ f.close()
 for seq in arr1:
     root = insert(root,seq)
 
-inOrder(root)
+printTree(root)
 # Test Case 5: Delete and check rebalancing
