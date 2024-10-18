@@ -54,7 +54,6 @@ def insert(node,val):
     node.height = 1 + max(height(node.left),height(node.right))
 
     balance = get_balance(node)
-    print(balance)
 
     if balance > 1 and val < node.left.val:
         return right_rotate(node)
@@ -138,7 +137,11 @@ root = None
 values_to_insert = [10, 20, 30, 40, 55, 26]
 for value in values_to_insert:
     root = insert(root, value)
-
 root = delete(root, 30)
+
+# f = open("fifteen.txt","r")
+# for line in f:
+#     insert(root,line)
+# f.close()
 printTree(root)
 # Test Case 5: Delete and check rebalancing
