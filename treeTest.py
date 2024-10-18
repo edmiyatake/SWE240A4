@@ -1,7 +1,20 @@
 # SET AVL IMPLEMENTATION FROM MIT WEBSITE
+def strToASCII(str):
+    sum = 0
+    for char in str:
+        sum += ord(char)
+    return sum
+
+def strToVal(str): 
+    string1 = str[slice(8,33)]
+    num = int(strToASCII(string1))
+    return num
+
 class Node:
-    def __init__(self,val):
-        self.val = val
+    def __init__(self,str):
+        self.lastName = str[slice(8,33)]
+        num = int(strToASCII(self.lastName))
+        self.val = num
         self.left = None
         self.right = None
         self.height = 1
@@ -46,7 +59,7 @@ def insert(node,val):
     if not node:
         return Node(val)
     
-    if val < node.val:
+    if strToVal(val) < node.val:
         node.left = insert(node.left,val)
     else:
         node.right = insert(node.right,val)
@@ -55,17 +68,17 @@ def insert(node,val):
 
     balance = get_balance(node)
 
-    if balance > 1 and val < node.left.val:
+    if balance > 1 and strToVal(val) < node.left.val:
         return right_rotate(node)
     
-    if balance > 1 and val > node.left.val:
+    if balance > 1 and strToVal(val) > node.left.val:
         node.left = left_rotate(node.left)
         return right_rotate(node)
     
-    if balance < -1 and val > node.right.val:
+    if balance < -1 and strToVal(val) > node.right.val:
         return left_rotate(node)
     
-    if balance < -1 and val < node.right.val:
+    if balance < -1 and strToVal(val) < node.right.val:
         node.right = right_rotate(node.right)
         return left_rotate(node)
 
@@ -119,12 +132,21 @@ def delete(node,val):
         return left_rotate(node)
 
     return node
+
+def inOrder(node):
+        if not node:
+            return 
+        if node:
+            inOrder(node.left)
+            print(node.lastName)
+            inOrder(node.right)
     
+PROBLEM IS THE COMPARATOR USING ORD INSTEAD OF INDEX BASED SORTING FUCKKKKKKKKKKKKKKKKKKKKKK
 
 def printTree(node, level=0):
         if node != None:
             printTree(node.left, level + 1)
-            print(' ' * 4 * level + '-> ' + str(node.val))
+            print(' ' * 4 * level + '-> ' + str(node.lastName))
             printTree(node.right, level + 1)
 
 
@@ -134,14 +156,19 @@ def printTree(node, level=0):
 root = None
 
 # Test Case 1: Simple insertion
-values_to_insert = [10, 20, 30, 40, 55, 26]
-for value in values_to_insert:
-    root = insert(root, value)
-root = delete(root, 30)
+# values_to_insert = [10, 20, 30, 40, 55, 26]
+# for value in values_to_insert:
+#     root = insert(root, value)
+# root = delete(root, 30)
 
-# f = open("fifteen.txt","r")
-# for line in f:
-#     insert(root,line)
-# f.close()
-printTree(root)
+arr1 = []
+f = open("fifteen.txt","r")
+for line in f:
+    arr1.append(line)
+f.close()
+
+for seq in arr1:
+    root = insert(root,seq)
+
+inOrder(root)
 # Test Case 5: Delete and check rebalancing
