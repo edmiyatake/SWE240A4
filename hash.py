@@ -76,6 +76,7 @@ for seq in arr1:
 
 printTree(root)
 
-
+AYE JUST DO WHAT I DID ORIGINALLY LIKE A WEEK AGO WITH THE COMPARATOR AND APPLY IT TO THE AVL TREE OR ELSE IT WONT BE O(1) COMPARISON
+ALSO CHECK IF PYTHONS LEXICOGRAPHICAL COMPARE IS O(1), wait actually what if its actually O(n) then my solution works? idk
 # for element in arr1:
 #     print(f"The name is {element[slice(8,33)]} and the corresponding value is: {strToASCII(element)}")
