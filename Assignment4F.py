@@ -57,6 +57,8 @@ class BinaryTree:
         if root is None:
             print("root is None???")
             return 0
+        # print(self.height(root.left))
+        # print(self.height(root.right))
         return self.height(root.left) - self.height(root.right)
 
 
@@ -92,4 +94,5 @@ newBST1 = BinaryTree()
 for strings in test1:
     newBST1.insert(strings)
 
-print(newBST1.get_balance())
+newBST1.printTree(newBST1.root)
+# print(newBST1.get_balance())
