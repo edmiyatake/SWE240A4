@@ -49,6 +49,23 @@ class BST:
                     return
                 else:
                     currNode = currNode.right
+        # node.height = 1 + max(height(node.left),height(node.right))
+
+        # balance = get_balance(node)
+
+        # if balance > 1 and strToVal(val) < node.left.val:
+        #     return right_rotate(node)
+    
+        # if balance > 1 and strToVal(val) > node.left.val:
+        #     node.left = left_rotate(node.left)
+        #     return right_rotate(node)
+    
+        # if balance < -1 and strToVal(val) > node.right.val:
+        #     return left_rotate(node)
+    
+        # if balance < -1 and strToVal(val) < node.right.val:
+        #     node.right = right_rotate(node.right)
+        #     return left_rotate(node)
     
     def delete(self,str):
         exit
