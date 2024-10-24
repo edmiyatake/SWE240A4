@@ -75,6 +75,17 @@ class BinaryTree:
             root.right = self.delete(root.right, temp.inputSTR)
 
         return root
+
+    # the reason it wasn't working the first time was because of the spaces with the inputSTR
+    def search(self,node,lastName):
+        if node == None:
+            return None
+        if node.lastName.strip() == lastName.strip():
+            return node.studentNum
+        if lastName.strip() < node.lastName.strip():
+            return  self.search(node.left, lastName)
+        else:
+            return self.search(node.right,lastName)
         
 
     def inOrder(self,node):
@@ -137,7 +148,10 @@ newBST1 = BinaryTree()
 for strings in test1:
     newBST1.insert(strings)
 
-newBST1.printTree(newBST1.root)
+# newBST1.printTree(newBST1.root)
+
+print(newBST1.search(newBST1.root,"White"))
+
 
 # newRoot = newBST1.delete(newBST1.root,"I8422911Johnston                 0341RST 1")
 # print("\n")
