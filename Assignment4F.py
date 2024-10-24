@@ -34,17 +34,48 @@ class BinaryTree:
                 # if currNode is empty, insert into left
                 if not currNode.left:
                     currNode.left = Node(inputSTR)
-                    currNode.left.height = 1 + currNode.height
                     return
                 else:
                     currNode = currNode.left
             else:
                 if not currNode.right:
                     currNode.right = Node(inputSTR)
-                    currNode.right.height = 1 + currNode.height
                     return
                 else:
                     currNode = currNode.right
+    
+    def delete(self,root,inputSTR):
+
+        if root == None:
+            return root
+
+        if inputSTR[slice(8,33)] < root.lastName:
+            root.left = self.delete(root.left,inputSTR)
+        elif inputSTR[slice(8,33)] > root.lastName:
+            root.right = self.delete(root.right,inputSTR)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            
+            # swap time
+            temp = self.find_min(root.right)
+
+            # Copy successor's content to this currNode
+            root.inputSTR = temp.inputSTR
+            root.op = temp.op
+            root.studentNum = temp.studentNum
+            root.lastName = temp.lastName
+            root.home = temp.home
+            root.program = temp.program
+            root.year = temp.year
+
+            # Delete the in-order successor
+            root.right = self.delete(root.right, temp.inputSTR)
+
+        return root
+        
 
     def inOrder(self,node):
         if node:
@@ -97,7 +128,7 @@ class BinaryTree:
 
 
 test1 = []
-f = open("fifteen.txt","r")
+f = open("tree-input.txt","r")
 for line in f:
     test1.append(line)
 f.close()
@@ -106,15 +137,22 @@ newBST1 = BinaryTree()
 for strings in test1:
     newBST1.insert(strings)
 
+newBST1.printTree(newBST1.root)
+
+# newRoot = newBST1.delete(newBST1.root,"I8422911Johnston                 0341RST 1")
+# print("\n")
+# newBST1.printTree(newRoot)
+
 # newBST1.printTree(newBST1.root)
-print("This is an inOrder traversal")
-newBST1.inOrder(newBST1.root)
+# # newBST1.printTree(newBST1.root)
+# print("This is an inOrder traversal")
+# newBST1.inOrder(newBST1.root)
 
-print("This is an preOrder traversal")
-newBST1.preOrder(newBST1.root)
+# print("This is an preOrder traversal")
+# newBST1.preOrder(newBST1.root)
 
-print("This is an postOrder traversal")
-newBST1.postOrder(newBST1.root)
+# print("This is an postOrder traversal")
+# newBST1.postOrder(newBST1.root)
 
-print("This is a BFS traversal")
-newBST1.BFS(newBST1.root)
+# print("This is a BFS traversal")
+# newBST1.BFS(newBST1.root)
