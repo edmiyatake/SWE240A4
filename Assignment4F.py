@@ -1,19 +1,12 @@
-# class Node:
-#     def __init__(self,str1):
-#         self.str1 = str1
-#         self.op = str1[0]
-#         self.studentNum = str1[slice(1,8)] # indices 1 -> 7 => 7 elements
-#         self.lastName = str1[slice(8,33)] # indices 8 -> 32 => 25 elements
-#         self.home = str1[slice(33,37)] # indices 33 -> 36 => 4 elements
-#         self.program = str1[slice(37,41)] # indices 37 -> 40 => 4 elements
-#         self.year = str1[slice(41,42)] #indices 41-> 41 => 1 element
-#         self.left = None
-#         self.right = None
 class Node:
     def __init__(self,inputSTR):
         self.inputSTR = inputSTR
+        self.op = inputSTR[0]
+        self.studentNum = inputSTR[slice(1,8)] # indices 1 -> 7 => 7 elements
         self.lastName = inputSTR[slice(8,33)]
-        self.height = 1
+        self.home = inputSTR[slice(33,37)] # indices 33 -> 36 => 4 elements
+        self.program = inputSTR[slice(37,41)] # indices 37 -> 40 => 4 elements        
+        self.year = inputSTR[slice(41,42)] #indices 41-> 41 => 1 element
         self.left = None
         self.right = None
 # input: root node, string from input.txt
@@ -52,21 +45,40 @@ class BinaryTree:
                     return
                 else:
                     currNode = currNode.right
-    def get_balance(self):
-        root = self.root
-        if root is None:
-            print("root is None???")
-            return 0
-        # print(self.height(root.left))
-        # print(self.height(root.right))
-        return self.height(root.left) - self.height(root.right)
-
 
     def inOrder(self,node):
         if node:
             self.inOrder(node.left)
-            print(node.inputSTR)
+            print(node.lastName)
             self.inOrder(node.right)
+    
+    def preOrder(self,node):
+        if not node:
+            return 
+        print(node.lastName)
+        if node.left:
+            self.preOrder(node.left)
+        if node.right:
+            self.preOrder(node.right)
+
+    def postOrder(self,node):
+        if not node:
+            return 
+        if node.left:
+            self.postOrder(node.left)
+        if node.right:
+            self.postOrder(node.right)
+        print(node.lastName)
+    
+    def BFS(self,root):
+        queue = [root]
+        while queue:
+            currNode = queue.pop(0)
+            print(currNode.lastName)
+            if currNode.left:
+                queue.append(currNode.left)
+            if currNode.right:
+                queue.append(currNode.right)
 
     def printTree(self,node, level=0):
         if node != None:
@@ -94,5 +106,15 @@ newBST1 = BinaryTree()
 for strings in test1:
     newBST1.insert(strings)
 
-newBST1.printTree(newBST1.root)
-# print(newBST1.get_balance())
+# newBST1.printTree(newBST1.root)
+print("This is an inOrder traversal")
+newBST1.inOrder(newBST1.root)
+
+print("This is an preOrder traversal")
+newBST1.preOrder(newBST1.root)
+
+print("This is an postOrder traversal")
+newBST1.postOrder(newBST1.root)
+
+print("This is a BFS traversal")
+newBST1.BFS(newBST1.root)
